@@ -1,4 +1,4 @@
-type Required = { aspectWidth: number; aspectHeight: number };
+type Required = { width: number; height: number };
 
 type Scale = (
   | { maxHeight: number; maxWidth: number }
@@ -7,27 +7,26 @@ type Scale = (
 ) &
   Required;
 
-const factor = ({
-  aspectWidth,
-  aspectHeight,
-  ...dimensions
-}: Scale): number => {
-  if ("maxHeight" in dimensions) return dimensions.maxHeight / aspectHeight;
-  if ("maxWidth" in dimensions) return dimensions.maxWidth / aspectWidth;
+const factor = ({ width, height, ...dimensions }: Scale): number => {
+  if ("maxHeight" in dimensions) return dimensions.maxHeight / height;
+
+  if ("maxWidth" in dimensions) return dimensions.maxWidth / width;
+
   if ("maxHeight" in dimensions && "maxWidth" in dimensions) {
     const { maxHeight, maxWidth } = dimensions;
     const shortest = Math.min(maxWidth, maxHeight);
     return {
-      [maxWidth]: maxWidth / aspectWidth,
-      [maxHeight]: maxHeight / aspectHeight
+      [maxWidth]: maxWidth / width,
+      [maxHeight]: maxHeight / height
     }[shortest];
   }
+
   throw new Error("Requires `maxWidth` or `maxHeight`");
 };
 
 export const scale = ({
-  aspectWidth,
-  aspectHeight,
+  width,
+  height,
   ...dimensions
 }: Scale): {
   width: number;
@@ -35,9 +34,10 @@ export const scale = ({
   paddingBottom: string;
   scale: number;
 } => {
-  const scale = factor({ aspectWidth, aspectHeight, ...dimensions });
-  const width = Math.floor(aspectWidth * scale);
-  const height = Math.floor(aspectHeight * scale);
-  const paddingBottom = `${(aspectHeight / aspectWidth) * 100.0}%`;
-  return { width, height, paddingBottom, scale };
+  const scale = factor({ width, height, ...dimensions });
+  const scaledWidth = Math.floor(width * scale);
+  const scaledHeight = Math.floor(height * scale);
+  const paddingBottom = `${(height / width) * 100.0}%`;
+
+  return { width: scaledWidth, height: scaledHeight, paddingBottom, scale };
 };
