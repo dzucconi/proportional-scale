@@ -1,0 +1,44 @@
+{
+  "name": "proportional-scale",
+  "version": "0.0.0-development",
+  "description": "Proportionally scales a rectangle",
+  "main": "dist/index.js",
+  "types": "dist/indes.d.ts",
+  "license": "MIT",
+  "repository": "https://github.com/dzucconi/proportional-scale",
+  "author": "dzucconi <mail@damonzucconi.com>",
+  "scripts": {
+    "clean": "rm -rf dist",
+    "commit": "yarn git-cz",
+    "compile": "yarn clean && tsc -p .",
+    "prepublishOnly": "yarn compile",
+    "semantic-release": "semantic-release",
+    "test": "jest",
+    "watch": "tsc -w -p ."
+  },
+  "devDependencies": {
+    "@commitlint/cli": "8.2.0",
+    "@commitlint/config-conventional": "8.2.0",
+    "@types/jest": "24.0.23",
+    "commitizen": "4.0.3",
+    "cz-conventional-changelog": "3.0.2",
+    "husky": "3.0.9",
+    "jest": "24.9.0",
+    "semantic-release": "^15.13.30",
+    "ts-jest": "24.1.0",
+    "typescript": "3.7.2"
+  },
+  "files": [
+    "dist"
+  ],
+  "config": {
+    "commitizen": {
+      "path": "./node_modules/cz-conventional-changelog"
+    }
+  },
+  "husky": {
+    "hooks": {
+      "commit-msg": "commitlint -E HUSKY_GIT_PARAMS"
+    }
+  }
+}
