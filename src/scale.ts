@@ -14,13 +14,7 @@ export const factor = ({ width, height, ...dimensions }: Scale): number => {
   if ("maxWidth" in dimensions && !("maxHeight" in dimensions))
     return dimensions.maxWidth / width;
 
-  const { maxHeight, maxWidth } = dimensions;
-  const shortest = Math.min(width, height);
-
-  return {
-    [height]: maxWidth / width,
-    [width]: maxHeight / height,
-  }[shortest];
+  return Math.min(dimensions.maxWidth / width, dimensions.maxHeight / height);
 };
 
 export const scale = ({

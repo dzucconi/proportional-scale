@@ -38,7 +38,7 @@ describe("scale", () => {
   });
 
   describe("landscapes", () => {
-    test("scales down the dimensions when just the maxWidth is passed", () => {
+    it("scales down the dimensions when just the maxWidth is passed", () => {
       expect(scale({ width: 800, height: 600, maxWidth: 400 })).toStrictEqual({
         width: 400,
         height: 300,
@@ -47,7 +47,7 @@ describe("scale", () => {
       });
     });
 
-    test("scales down the dimensions when just the maxHeight is passed", () => {
+    it("scales down the dimensions when just the maxHeight is passed", () => {
       expect(scale({ width: 800, height: 600, maxHeight: 300 })).toStrictEqual({
         width: 400,
         height: 300,
@@ -56,7 +56,7 @@ describe("scale", () => {
       });
     });
 
-    test("scales down the dimensions when both are passed", () => {
+    it("scales down the dimensions when both are passed", () => {
       expect(
         scale({
           width: 800,
@@ -71,10 +71,26 @@ describe("scale", () => {
         scale: 0.5,
       });
     });
+
+    it("scales down the dimensions when both are passed (2)", () => {
+      expect(
+        scale({
+          width: 400,
+          height: 300,
+          maxHeight: 100,
+          maxWidth: 600,
+        })
+      ).toStrictEqual({
+        width: 133,
+        height: 100,
+        paddingBottom: "75%",
+        scale: 0.3333333333333333,
+      });
+    });
   });
 
   describe("portrait", () => {
-    test("scales down the dimensions when just the maxWidth is passed", () => {
+    it("scales down the dimensions when just the maxWidth is passed", () => {
       expect(scale({ width: 600, height: 800, maxWidth: 300 })).toStrictEqual({
         width: 300,
         height: 400,
@@ -83,7 +99,7 @@ describe("scale", () => {
       });
     });
 
-    test("scales down the dimensions when just the maxHeight is passed", () => {
+    it("scales down the dimensions when just the maxHeight is passed", () => {
       expect(scale({ width: 600, height: 800, maxHeight: 300 })).toStrictEqual({
         width: 225,
         height: 300,
@@ -92,7 +108,7 @@ describe("scale", () => {
       });
     });
 
-    test("scales down the dimensions when both are passed", () => {
+    it("scales down the dimensions when both are passed", () => {
       expect(
         scale({
           width: 600,
@@ -110,7 +126,7 @@ describe("scale", () => {
   });
 
   describe("square", () => {
-    test("scales down the dimensions when just the maxWidth is passed", () => {
+    it("scales down the dimensions when just the maxWidth is passed", () => {
       expect(scale({ width: 600, height: 600, maxWidth: 300 })).toStrictEqual({
         width: 300,
         height: 300,
@@ -119,7 +135,7 @@ describe("scale", () => {
       });
     });
 
-    test("scales down the dimensions when just the maxHeight is passed", () => {
+    it("scales down the dimensions when just the maxHeight is passed", () => {
       expect(scale({ width: 600, height: 600, maxHeight: 150 })).toStrictEqual({
         width: 150,
         height: 150,
@@ -128,7 +144,7 @@ describe("scale", () => {
       });
     });
 
-    test("scales down the dimensions when both are passed", () => {
+    it("scales down the dimensions when both are passed", () => {
       expect(
         scale({
           width: 800,
