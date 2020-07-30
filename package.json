@@ -17,16 +17,16 @@
     "watch": "tsc -w -p ."
   },
   "devDependencies": {
-    "@commitlint/cli": "9.0.1",
-    "@commitlint/config-conventional": "9.0.1",
-    "@types/jest": "26.0.4",
+    "@commitlint/cli": "9.1.1",
+    "@commitlint/config-conventional": "9.1.1",
+    "@types/jest": "26.0.7",
     "commitizen": "4.1.2",
     "cz-conventional-changelog": "3.2.0",
     "husky": "4.2.5",
-    "jest": "26.1.0",
+    "jest": "26.2.1",
     "semantic-release": "17.1.1",
-    "ts-jest": "26.1.1",
-    "typescript": "3.9.6"
+    "ts-jest": "26.1.4",
+    "typescript": "3.9.7"
   },
   "files": [
     "dist"
