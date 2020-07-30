@@ -1,4 +1,24 @@
-import { scale } from "./scale";
+import { scale, paddingBottom } from "./scale";
+
+describe("paddingBottom", () => {
+  it("calculates a correct value for paddingBottom (1)", () => {
+    expect(paddingBottom({ width: 300, height: 300 })).toBe("100%");
+  });
+
+  it("calculates a correct value for paddingBottom (2)", () => {
+    expect(paddingBottom({ width: 300, height: 400 })).toBe(
+      "133.33333333333331%"
+    );
+  });
+
+  it("calculates a correct value for paddingBottom (3)", () => {
+    expect(paddingBottom({ width: 400, height: 300 })).toBe("75%");
+  });
+
+  it("calculates a correct value for paddingBottom (4)", () => {
+    expect(paddingBottom({ width: 3000, height: 300 })).toBe("10%");
+  });
+});
 
 describe("scale", () => {
   it("calculates width and height correctly", () => {
