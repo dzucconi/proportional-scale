@@ -1,11 +1,11 @@
-export type Required = { width: number; height: number };
+export type AspectDimensions = { width: number; height: number };
 
-export type Scale = (
+export type MaxDimensions =
   | { maxHeight: number; maxWidth: number }
   | { maxHeight: number }
-  | { maxWidth: number }
-) &
-  Required;
+  | { maxWidth: number };
+
+export type Scale = AspectDimensions & MaxDimensions;
 
 export const factor = ({ width, height, ...dimensions }: Scale): number => {
   if ("maxHeight" in dimensions && !("maxWidth" in dimensions))
@@ -16,6 +16,9 @@ export const factor = ({ width, height, ...dimensions }: Scale): number => {
 
   return Math.min(dimensions.maxWidth / width, dimensions.maxHeight / height);
 };
+
+export const paddingBottom = ({ width, height }: AspectDimensions) =>
+  `${(height / width) * 100.0}%`;
 
 export const scale = ({
   width,
@@ -30,7 +33,11 @@ export const scale = ({
   const scale = factor({ width, height, ...dimensions });
   const scaledWidth = Math.floor(width * scale);
   const scaledHeight = Math.floor(height * scale);
-  const paddingBottom = `${(height / width) * 100.0}%`;
 
-  return { width: scaledWidth, height: scaledHeight, paddingBottom, scale };
+  return {
+    width: scaledWidth,
+    height: scaledHeight,
+    paddingBottom: paddingBottom({ width, height }),
+    scale,
+  };
 };
